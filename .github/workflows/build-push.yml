@@ -1,10 +1,16 @@
+name: Build and Deploy
+
 on:
   push:
     branches:
       - main
+  workflow_dispatch:
+    inputs: {}
 
 jobs:
-  print_hello:
-    runs-on: ubuntu-latest
+  build:
+    runs-on: ubuntu-20.04
     steps:
-      - run: echo "Hello World!"
+      - uses: actions/checkout@v3
+      - name: Build the docker image
+        run: make build
